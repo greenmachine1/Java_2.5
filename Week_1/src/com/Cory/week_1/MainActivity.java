@@ -5,6 +5,7 @@ import com.Cory.lib.WebInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Messenger;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -38,26 +39,41 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				final Handler JsonHandler = new Handler(){
+
+					@Override
+					public void handleMessage(Message message){
+						
+						// what gets returned from the called service
+						Object returnedObject = message.obj;
+						
+						// casting the object to a string
+						String returnedObjectString = returnedObject.toString();
+						
+						if(message.arg1 == RESULT_OK && returnedObject != null){
+							
+							Log.i("information", returnedObjectString);
+							
+						}
+					}
+		    		
+		    	};
 				
-				Intent myIntent = new Intent(v.getContext(), JSONWeatherService.class);
 				
-				myIntent.putExtra("key", "Yes");
+				
+		    	// creation of my messenger to the service
+		    	Messenger jsonMessenger = new Messenger(JsonHandler);
+		
+		    	Intent myServiceIntent = new Intent(_context, JSONWeatherService.class);
+		
+		    	// basically this passes info to my service
+		    	myServiceIntent.putExtra("messenger", jsonMessenger);
+		    	myServiceIntent.putExtra("key", "Gojira");
+		    	startService(myServiceIntent);
 			}
-        	
-        });
+    });
         
-        final Handler serviceHandler = new Handler(){
-        	public void handleMessage(Message message){
-        		
-        		Object returnedObject = message.obj;
-        		
-        		if(message.arg1 == RESULT_OK && returnedObject != null){
-        			
-        			// do stuff here
-        		}
-        	}
-        };
-        
+       
         
         
     }

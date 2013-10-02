@@ -11,6 +11,20 @@ import android.util.Log;
 public class WebInfo {
 	static Boolean _conn = false;
 	static String _connectionType = "Unavailable";
+	private static WebInfo instance = null;
+	
+	// creation of a singleton class
+	protected WebInfo(){
+		// created to prevent against multiple instantiations
+	}
+	
+	public static WebInfo getInstance(){
+		if(instance == null){
+			instance = new WebInfo();
+		}
+		return instance;
+		
+	}
 
 	public static String getConnectionType(Context context){
 		netInfo(context);

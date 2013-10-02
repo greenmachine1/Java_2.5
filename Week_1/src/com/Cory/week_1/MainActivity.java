@@ -20,10 +20,16 @@ public class MainActivity extends Activity {
         // making sure to provide the context
         _context = this;
         
+        // creating a singleton out of my WebInfo class
         WebInfo.getInstance();
 		String connectionType = WebInfo.getConnectionType(_context);
         
         Log.i("Connection type", connectionType);
+        
+        
+        
+        
+        
         
     }
 

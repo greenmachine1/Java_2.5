@@ -15,11 +15,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
 	Context _context;
 	EditText userInputBox;
+	ListView listView;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,11 @@ public class MainActivity extends Activity {
         
         Log.i("Connection type", connectionType);
         
+        // targetting my listView
+        listView = (ListView)this.findViewById(R.id.list);
+        View listHeader = this.getLayoutInflater().inflate(R.layout.list_header, null);
+        listView.addHeaderView(listHeader);
+        
         userInputBox = (EditText)findViewById(R.id.userInput);
         
         
@@ -45,6 +52,8 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
+				// converts the user input into a string.  This will need to check
+				// for whitespace and also if the user has not inputted anything
 				String userInputString = userInputBox.getText().toString();
 				
 				final Handler JsonHandler = new Handler(){
@@ -80,10 +89,7 @@ public class MainActivity extends Activity {
 		    	startService(myServiceIntent);
 			}
         });
-        
-       
-        
-        
+         
     }
 
 

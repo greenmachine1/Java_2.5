@@ -22,9 +22,9 @@ public class WebInfo {
 	static String _connectionType = "Unavailable";
 	private static WebInfo instance = null;
 	
-	// creation of a singleton class
+	/* creation of a singleton class */
 	protected WebInfo(){
-		// created to prevent against multiple instantiations
+		/* created to prevent against multiple instantiations */
 	}
 	
 	public static WebInfo getInstance(){

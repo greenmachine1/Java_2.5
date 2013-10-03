@@ -40,14 +40,14 @@ public class JSONWeatherService extends IntentService{
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-		// this has to do with my messenger from the main activity
+		/* this has to do with my messenger from the main activity */
 		Bundle extras = intent.getExtras();
 		
-		// loading in the passed in name of the band we wish to get more info on.
+		/* loading in the passed in name of the band we wish to get more info on. */
 		Messenger messenger = (Messenger) extras.get(NAME);
 		String keyOfThings = (String) extras.get(KEY);
 
-		// obtaining my object that gets returned from my Json Data
+		/* obtaining my object that gets returned from my Json Data */
 		Message message = Message.obtain();
 		message.arg1 = Activity.RESULT_OK;
 		message.obj = returnJsonData(keyOfThings);
@@ -62,10 +62,11 @@ public class JSONWeatherService extends IntentService{
 		
 	}
 	
-	// method used to get the JSON data
+	/* method used to get the JSON data */
 	public String returnJsonData(String userInput){ 
-		// creation of url
-		// calling out to my weather api
+		/* creation of url
+		* calling out to my weather api 
+		*/
 		String completeURL = "http://api.openweathermap.org/data/2.5/weather?q=" + userInput + ",us";
 		
 		URL finalURL = null;
@@ -76,7 +77,7 @@ public class JSONWeatherService extends IntentService{
 			e.printStackTrace();
 		}
 
-			// creating a temp string to hold the response
+			/* creating a temp string to hold the response */
 			String response = "";
 			response = WebInfo.getURLStringResponse(finalURL);
 

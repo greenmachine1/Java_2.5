@@ -21,7 +21,7 @@ public class FileManager {
 
 	private static FileManager m_instance;
 	
-	// constructor
+	/* constructor */
 	private FileManager(){
 		
 	}

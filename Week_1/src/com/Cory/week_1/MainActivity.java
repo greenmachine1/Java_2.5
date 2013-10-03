@@ -14,10 +14,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
 	Context _context;
+	EditText userInputBox;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +35,18 @@ public class MainActivity extends Activity {
         
         Log.i("Connection type", connectionType);
         
+        userInputBox = (EditText)findViewById(R.id.userInput);
+        
+        
         Button goButton = (Button)findViewById(R.id.goButton);
         goButton.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				String userInputString = userInputBox.getText().toString();
+				
 				final Handler JsonHandler = new Handler(){
 
 					@Override
@@ -68,10 +76,10 @@ public class MainActivity extends Activity {
 		
 		    	// basically this passes info to my service
 		    	myServiceIntent.putExtra("messenger", jsonMessenger);
-		    	myServiceIntent.putExtra("key", "Gojira");
+		    	myServiceIntent.putExtra("key", userInputString);
 		    	startService(myServiceIntent);
 			}
-    });
+        });
         
        
         

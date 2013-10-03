@@ -16,12 +16,14 @@ import android.util.Log;
 
 /* The point of this service call is to basically load my json data into
  * storage behind the scenes
+ * 
+ * Weather service call key : 5b32be91adbf4fe7
  */
 
 public class JSONWeatherService extends IntentService{
 
-	public static final String NAME_OF_BAND = "messenger";
-	public static final String KEY_OF_THINGS = "key";
+	public static final String NAME = "messenger";
+	public static final String KEY = "key";
 	
 	public JSONWeatherService() {
 		super("JSONWeatherService");
@@ -35,8 +37,8 @@ public class JSONWeatherService extends IntentService{
 		Bundle extras = intent.getExtras();
 		
 		// loading in the passed in name of the band we wish to get more info on.
-		Messenger messenger = (Messenger) extras.get(NAME_OF_BAND);
-		String keyOfThings = (String) extras.get(KEY_OF_THINGS);
+		Messenger messenger = (Messenger) extras.get(NAME);
+		String keyOfThings = (String) extras.get(KEY);
 
 		// obtaining my object that gets returned from my Json Data
 		Message message = Message.obtain();
@@ -54,10 +56,10 @@ public class JSONWeatherService extends IntentService{
 	}
 	
 	// method used to get the JSON data
-	public String returnJsonData(String userInput){
-		
+	public String returnJsonData(String userInput){ 
 		// creation of url
-		String completeURL = "https://itunes.apple.com/search?term=" + userInput + "&entity=musicArtist&limit=1";
+		// calling out to my weather api
+		String completeURL = "http://api.wunderground.com/api/5b32be91adbf4fe7/conditions/q/CA/" + userInput +".json";
 		
 		URL finalURL = null;
 		//try{

@@ -1,7 +1,14 @@
+/*
+ * Project		Week_1
+ * 
+ * Package		com.Cory.week_1
+ * 
+ * @Author		Cory Green
+ * 
+ * Date			Oct 3, 2013
+ */
 package com.Cory.week_1;
 
-import java.io.ObjectOutputStream.PutField;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,13 +33,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
 	// global variables
 	Context _context;
 	EditText userInputBox;
-	ListView listView;
+	TextView text;
+    ListView listView;
 	
 	FileManager m_file;
 	String fileName = "json_info.txt";
@@ -44,6 +53,8 @@ public class MainActivity extends Activity {
         
         // making sure to provide the context
         _context = this;
+        
+        text = (TextView)findViewById(R.id.resultText);
         
         // creating a singleton out of my WebInfo class
         WebInfo.getInstance();
@@ -57,8 +68,7 @@ public class MainActivity extends Activity {
         listView.addHeaderView(listHeader);
         
         userInputBox = (EditText)findViewById(R.id.userInput);
-        
-        
+       
         Button goButton = (Button)findViewById(R.id.goButton);
         goButton.setOnClickListener(new OnClickListener(){
 
@@ -86,9 +96,7 @@ public class MainActivity extends Activity {
 							// calls on my FileManager class
 					        m_file = FileManager.getInstance();
 					        m_file.writeStringFile(_context, fileName, returnedObjectString);
-							
-							//Log.i("object", returnedObjectString);
-					        
+
 					        displayData();
 							
 						}
@@ -118,9 +126,9 @@ public class MainActivity extends Activity {
     	
     	// loading my file into a string
     	String JSONString = m_file.readStringFile(this, fileName);
-    	Log.i("response", JSONString);
+    	//Log.i("response", JSONString);
     	
-    	//ArrayList<HashMap<String, String>>mylist = new ArrayList<HashMap<String,String>>();
+    	ArrayList<HashMap<String, String>>mylist = new ArrayList<HashMap<String,String>>();
     	JSONObject job = null;
     	JSONArray results = null;
     	
@@ -129,52 +137,32 @@ public class MainActivity extends Activity {
 				job = new JSONObject(JSONString);
 				results = job.getJSONArray("weather");
 				
+				// setting up the different strings to look for in the json object
 				String weatherString = results.getJSONObject(0).getString("main");
 				
-				Log.i("main", weatherString);
+				String nameString = job.getString("name");
+
+				String windSpeed = job.getJSONObject("wind").getString("speed");
+				
+	    		HashMap<String, String> displayMap = new HashMap<String, String>();
+	    		displayMap.put("name", nameString);
+	    		displayMap.put("weather", weatherString);
+	    		displayMap.put("speed", windSpeed);
+	    		
+	    		mylist.add(displayMap);
+	    		
+	    		// this is complicated but it basically assigns the rows for each element
+	    		SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.list_row, 
+	    				new String[] {"name", "weather", "speed"}, 
+	    				new int[] {R.id.name, R.id.weather, R.id.speed});
+	    		
+	    		
+	    		listView.setAdapter(adapter);
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		//try{
-    		/*
-    		// gathers the specific fields
-    		String artistName = results.getJSONObject(0).getString("artistName").toString();
-    		String artistGenre = results.getJSONObject(0).getString("primaryGenreName").toString();
-    		String artistURL = results.getJSONObject(0).getString("artistLinkUrl").toString();
-    		
-    		//text.setText("artistName: " + artistName + "artistGenre: " + artistGenre + "artistURL: " + artistURL);
-    		HashMap<String, String> displayMap = new HashMap<String, String>();
-    		displayMap.put("artist", artistName);
-    		displayMap.put("genre", artistGenre);
-    		displayMap.put("url", artistURL);
-    		
-    		//displayMap.put("artist", cursor.getString(1));
-    		
-    		mylist.add(displayMap);
-    		
-    		// this is complicated but it basically assigns the rows for each element
-    		SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.list_row, 
-    				new String[] {"artist", "genre", "url"}, 
-    				new int[] {R.id.artist, R.id.genre, R.id.url});
-    		*/
-    		/*
-    		listView.setAdapter(adapter);
-    		
-    	} catch(JSONException e){
-    		Log.e("Nope", e.toString());
-    	}
-    	*/
-    	
     }
 
 

@@ -1,3 +1,12 @@
+/*
+ * Project		Week_1
+ * 
+ * Package		com.Cory.week_1
+ * 
+ * @Author		Cory Green
+ * 
+ * Date			Oct 3, 2013
+ */
 package com.Cory.week_1;
 
 import java.io.BufferedInputStream;

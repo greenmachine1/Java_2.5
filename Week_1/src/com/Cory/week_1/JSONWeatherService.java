@@ -1,3 +1,12 @@
+/*
+ * Project		Week_1
+ * 
+ * Package		com.Cory.week_1
+ * 
+ * @Author		Cory Green
+ * 
+ * Date			Oct 3, 2013
+ */
 package com.Cory.week_1;
 
 import java.net.MalformedURLException;
@@ -16,8 +25,6 @@ import android.util.Log;
 
 /* The point of this service call is to basically load my json data into
  * storage behind the scenes
- * 
- * Weather service call key : 5b32be91adbf4fe7
  */
 
 public class JSONWeatherService extends IntentService{
@@ -59,21 +66,15 @@ public class JSONWeatherService extends IntentService{
 	public String returnJsonData(String userInput){ 
 		// creation of url
 		// calling out to my weather api
-		//String completeURL = "http://api.wunderground.com/api/5b32be91adbf4fe7/conditions/q/CA/" + userInput +".json";
-		//String completeURL = "http://www.myweather2.com/developer/forecast.ashx?uac=RlEYWUfRiR&output=json&query=SW1";
-		//String completeURL = "https://itunes.apple.com/search?term=" + userInput + "&entity=musicArtist&limit=1";
-		
-		String completeURL = "http://api.openweathermap.org/data/2.5/weather?q=London,uk";
+		String completeURL = "http://api.openweathermap.org/data/2.5/weather?q=" + userInput + ",us";
 		
 		URL finalURL = null;
-		//try{
-			// dont actually need my UTF-8 involved in the url
-			try {
-				finalURL = new URL(completeURL);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			finalURL = new URL(completeURL);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 			// creating a temp string to hold the response
 			String response = "";

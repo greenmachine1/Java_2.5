@@ -19,9 +19,13 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
+	// global variables
 	Context _context;
 	EditText userInputBox;
 	ListView listView;
+	
+	FileManager m_file;
+	String fileName = "json_info.txt";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,16 @@ public class MainActivity extends Activity {
 							
 							Log.i("information", returnedObjectString);
 							
+							// calls on my FileManager class
+					        m_file = FileManager.getInstance();
+					        m_file.writeStringFile(_context, fileName, returnedObjectString);
+							
+							//text.setText(m_file.readStringFile(_context, fileName));
+							
+							//Log.i("object", returnedObjectString);
+					        
+					        displayData();
+							
 						}
 					}
 		    		
@@ -90,6 +104,11 @@ public class MainActivity extends Activity {
 			}
         });
          
+    }
+    
+    // this will parse out the saved file and present it back to the user
+    public void displayData(){
+    	
     }
 
 

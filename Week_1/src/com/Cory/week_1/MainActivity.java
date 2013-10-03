@@ -118,28 +118,21 @@ public class MainActivity extends Activity {
     	
     	// loading my file into a string
     	String JSONString = m_file.readStringFile(this, fileName);
-    	//Log.i("response", JSONString);
+    	Log.i("response", JSONString);
     	
     	//ArrayList<HashMap<String, String>>mylist = new ArrayList<HashMap<String,String>>();
     	JSONObject job = null;
     	JSONArray results = null;
     	
-    	JSONObject secondStepObject = null;
-    	
-    	JSONObject thirdStepObject = null;
-    	
-    	
-    	
     		// getting the array from the field "results"
-    		//job = new JSONObject(JSONString);
     		try {
 				job = new JSONObject(JSONString);
 				
-				secondStepObject = job.getJSONObject("display_location");
+				//secondStepObject = job.getJSONObject("display_location");
 				
-				String fullName = secondStepObject.getString("full");
+				//String fullName = secondStepObject.getString("full");
 				
-				Log.i("Full name", fullName);
+				//Log.i("Full name", fullName);
 				
 				
 			} catch (JSONException e) {

@@ -60,6 +60,8 @@ public class JSONWeatherService extends IntentService{
 		// creation of url
 		// calling out to my weather api
 		String completeURL = "http://api.wunderground.com/api/5b32be91adbf4fe7/conditions/q/CA/" + userInput +".json";
+		//String completeURL = "http://www.myweather2.com/developer/forecast.ashx?uac=RlEYWUfRiR&output=json&query=SW1";
+		//String completeURL = "https://itunes.apple.com/search?term=" + userInput + "&entity=musicArtist&limit=1";
 		
 		URL finalURL = null;
 		//try{

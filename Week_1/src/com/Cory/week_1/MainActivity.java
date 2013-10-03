@@ -1,9 +1,12 @@
 package com.Cory.week_1;
 
+import java.io.ObjectOutputStream.PutField;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.Cory.lib.WebInfo;
@@ -121,14 +124,37 @@ public class MainActivity extends Activity {
     	JSONObject job = null;
     	JSONArray results = null;
     	
-    	try{
+    	JSONObject secondStepObject = null;
+    	
+    	JSONObject thirdStepObject = null;
+    	
+    	
+    	
     		// getting the array from the field "results"
     		//job = new JSONObject(JSONString);
-    		//results = job.getJSONArray("response");
+    		try {
+				job = new JSONObject(JSONString);
+				
+				secondStepObject = job.getJSONObject("display_location");
+				
+				String fullName = secondStepObject.getString("full");
+				
+				Log.i("Full name", fullName);
+				
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     		
-    		Log.i("Yeppers", JSONString);
     		
     		
+    		
+    		
+    		
+    		
+    		
+    		//try{
     		/*
     		// gathers the specific fields
     		String artistName = results.getJSONObject(0).getString("artistName").toString();
@@ -152,11 +178,11 @@ public class MainActivity extends Activity {
     		*/
     		/*
     		listView.setAdapter(adapter);
-    		*/
-    	} catch(Exception e){
+    		
+    	} catch(JSONException e){
     		Log.e("Nope", e.toString());
     	}
-    	
+    	*/
     	
     }
 

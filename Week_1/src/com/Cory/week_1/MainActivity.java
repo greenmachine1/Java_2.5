@@ -115,21 +115,19 @@ public class MainActivity extends Activity {
     	
     	// loading my file into a string
     	String JSONString = m_file.readStringFile(this, fileName);
-    	Log.i("response", JSONString);
+    	//Log.i("response", JSONString);
     	
     	//ArrayList<HashMap<String, String>>mylist = new ArrayList<HashMap<String,String>>();
     	JSONObject job = null;
     	JSONArray results = null;
     	
     	try{
-    		
     		// getting the array from the field "results"
-    		job = new JSONObject(JSONString);
-    		results = job.getJSONArray("response");
+    		//job = new JSONObject(JSONString);
+    		//results = job.getJSONArray("response");
     		
-    		String responseString = job.getString("response").toString();
+    		Log.i("Yeppers", JSONString);
     		
-    		Log.i("response", JSONString);
     		
     		/*
     		// gathers the specific fields
@@ -156,7 +154,7 @@ public class MainActivity extends Activity {
     		listView.setAdapter(adapter);
     		*/
     	} catch(Exception e){
-    		
+    		Log.e("Nope", e.toString());
     	}
     	
     	

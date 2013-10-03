@@ -1,5 +1,11 @@
 package com.Cory.week_1;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.Cory.lib.WebInfo;
 
 import android.os.Bundle;
@@ -16,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 public class MainActivity extends Activity {
 
@@ -73,19 +80,16 @@ public class MainActivity extends Activity {
 						
 						if(message.arg1 == RESULT_OK && returnedObject != null){
 							
-							Log.i("information", returnedObjectString);
-							
 							// calls on my FileManager class
 					        m_file = FileManager.getInstance();
 					        m_file.writeStringFile(_context, fileName, returnedObjectString);
-							
-							//text.setText(m_file.readStringFile(_context, fileName));
 							
 							//Log.i("object", returnedObjectString);
 					        
 					        displayData();
 							
 						}
+						
 					}
 		    		
 		    	};
@@ -108,6 +112,53 @@ public class MainActivity extends Activity {
     
     // this will parse out the saved file and present it back to the user
     public void displayData(){
+    	
+    	// loading my file into a string
+    	String JSONString = m_file.readStringFile(this, fileName);
+    	Log.i("response", JSONString);
+    	
+    	//ArrayList<HashMap<String, String>>mylist = new ArrayList<HashMap<String,String>>();
+    	JSONObject job = null;
+    	JSONArray results = null;
+    	
+    	try{
+    		
+    		// getting the array from the field "results"
+    		job = new JSONObject(JSONString);
+    		results = job.getJSONArray("response");
+    		
+    		String responseString = job.getString("response").toString();
+    		
+    		Log.i("response", JSONString);
+    		
+    		/*
+    		// gathers the specific fields
+    		String artistName = results.getJSONObject(0).getString("artistName").toString();
+    		String artistGenre = results.getJSONObject(0).getString("primaryGenreName").toString();
+    		String artistURL = results.getJSONObject(0).getString("artistLinkUrl").toString();
+    		
+    		//text.setText("artistName: " + artistName + "artistGenre: " + artistGenre + "artistURL: " + artistURL);
+    		HashMap<String, String> displayMap = new HashMap<String, String>();
+    		displayMap.put("artist", artistName);
+    		displayMap.put("genre", artistGenre);
+    		displayMap.put("url", artistURL);
+    		
+    		//displayMap.put("artist", cursor.getString(1));
+    		
+    		mylist.add(displayMap);
+    		
+    		// this is complicated but it basically assigns the rows for each element
+    		SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.list_row, 
+    				new String[] {"artist", "genre", "url"}, 
+    				new int[] {R.id.artist, R.id.genre, R.id.url});
+    		*/
+    		/*
+    		listView.setAdapter(adapter);
+    		*/
+    	} catch(Exception e){
+    		
+    	}
+    	
     	
     }
 

@@ -127,13 +127,11 @@ public class MainActivity extends Activity {
     		// getting the array from the field "results"
     		try {
 				job = new JSONObject(JSONString);
+				results = job.getJSONArray("weather");
 				
-				//secondStepObject = job.getJSONObject("display_location");
+				String weatherString = results.getJSONObject(0).getString("main");
 				
-				//String fullName = secondStepObject.getString("full");
-				
-				//Log.i("Full name", fullName);
-				
+				Log.i("main", weatherString);
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

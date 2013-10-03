@@ -10,12 +10,17 @@
         android:layout_height="wrap_content"
         android:ems="10" >
     </EditText>
-
     <Button
         android:id="@+id/goButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button" />
+    <ListView
+         android:id="@+id/list"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:divider="#ffffff"
+         android:drawSelectorOnTop="false"/>
 
 </LinearLayout>

@@ -47,6 +47,8 @@ public class MainActivity extends Activity {
 	FileManager m_file;
 	String fileName = "json_info.txt";
 	
+	public static String FILE_NAME = "json_info.txt";
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

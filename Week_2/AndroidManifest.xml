@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <service android:name="JSONWeatherService"></service>
+        <provider android:name="CollectionProvider"></provider>
     </application>
 
 </manifest>

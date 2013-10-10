@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.app.Activity;
+import android.app.Fragment.SavedState;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -53,9 +54,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        if(savedInstanceState != null){
-        	
-        }
+        
         
         
         setContentView(R.layout.main);

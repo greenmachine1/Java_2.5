@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         listView.addHeaderView(listHeader);
         
         userInputBox = (EditText)findViewById(R.id.userInput);
-        userInputBox.setText(CollectionProvider.weatherData.CONTENT_URI.toString());
+        //userInputBox.setText(CollectionProvider.weatherData.CONTENT_URI.toString());
         
         
         

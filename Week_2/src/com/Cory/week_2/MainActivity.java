@@ -52,6 +52,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        if(savedInstanceState != null){
+        	
+        }
+        
+        
         setContentView(R.layout.main);
         
         /* making sure to provide the context */

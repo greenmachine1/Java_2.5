@@ -1,5 +1,9 @@
 package com.Cory.week_2;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -86,17 +90,56 @@ public class CollectionProvider extends ContentProvider{
 		MatrixCursor result = new MatrixCursor(weatherData.PROJECTION);
 		
 		String JSONString = FileManager.getInstance().readStringFile(getContext(), MainActivity.FILE_NAME);
+		JSONObject job = null;
+		JSONArray recordArray = null;
+		JSONObject field = null;
+		
+		try{
+			job = new JSONObject(JSONString);
+			recordArray = job.getJSONArray("weather");
+			
+		} catch (JSONException e){
+			e.printStackTrace();
+		}
+		
+		if(recordArray == null){
+			return result;
+		}
+		
 		
 		switch (uriMatcher.match(uri)){
 		case ITEMS:
-			return weatherData.CONTENT_TYPE;
+			//return weatherData.CONTENT_TYPE;
 		
+			/* will be putting my results into the result matrix */
+			try{
+				/* defining the object field */  
+				/*
+				String nameString = job.getString("name");
+
+				String windSpeed = job.getJSONObject("wind").getString("speed");
+				
+				field = recordArray.getJSONObject(0).getJSONObject("weather");
+				*/
+				
+				String weatherString = recordArray.getJSONObject(0).getString("main");
+				
+				String nameString = job.getString("name");
+
+				String windSpeed = job.getJSONObject("wind").getString("speed");
+				
+				result.addRow(new Object[] { 0 + 1, nameString, weatherString, windSpeed});
+				
+			}catch (JSONException e){
+				e.printStackTrace();
+			}
+			
 		case ITEMS_ID:
-			return weatherData.CONTENT_ITEM_TYPE;
+			//return weatherData.CONTENT_ITEM_TYPE;
 		
 		}
 		
-		return null;
+		return result;
 	}
 
 	@Override

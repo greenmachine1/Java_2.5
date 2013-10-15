@@ -158,9 +158,12 @@ public class MainActivity extends Activity {
 					String dt = results.getJSONObject(i).getString("dt");
 					String pressure = results.getJSONObject(i).getString("pressure");
 					
-						Log.i("yes", dt + " " + pressure);
+					/* Used to get the weather array from within the list array */ 
+					weather = results.getJSONObject(i).getJSONArray("weather");
+					String weatherString = weather.getJSONObject(0).getString("description");
+					
+					Log.i("yes", dt + " " + pressure + " " + weatherString);
 						
-
 				}
 				
 				

@@ -160,22 +160,8 @@ public class MainActivity extends Activity {
 					
 						Log.i("yes", dt + " " + pressure);
 						
-						
-					
-					
-					//Log.i("yes", dt + " " + pressure);
-				}
-				
-				/* setting up the different strings to look for in the json object */
-				/*
-				String weatherString = results.getJSONObject(0).getString("main");
-				
-				String nameString = job.getString("name");
 
-				String windSpeed = job.getJSONObject("wind").getString("speed");
-				*/
-				
-				
+				}
 				
 				
 				

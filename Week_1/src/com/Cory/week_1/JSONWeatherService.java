@@ -67,7 +67,7 @@ public class JSONWeatherService extends IntentService{
 		/* creation of url
 		* calling out to my weather api 
 		*/
-		String completeURL = "http://api.openweathermap.org/data/2.5/weather?q=" + userInput + ",us";
+		String completeURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + userInput + "&mode=json&cnt=7";
 		
 		URL finalURL = null;
 		try {

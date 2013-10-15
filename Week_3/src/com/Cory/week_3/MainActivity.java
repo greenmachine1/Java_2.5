@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
 	Context _context;
 	EditText userInputBox;
 	TextView text;
+	TextView cityText;
     ListView listView;
 	
 	FileManager m_file;
@@ -55,6 +56,7 @@ public class MainActivity extends Activity {
         _context = this;
         
         text = (TextView)findViewById(R.id.resultText);
+        cityText = (TextView)findViewById(R.id.cityText);
         
  
         /* creating a singleton out of my WebInfo class */
@@ -145,8 +147,9 @@ public class MainActivity extends Activity {
 				city = job.getJSONObject("city");
 				
 				String cityName = city.getString("name");
-				
-				Log.i("city name", cityName);
+
+				/* Setting my city text field */
+				cityText.setText(cityName);
 				
 				/* creating the results array  */
 				results = job.getJSONArray("list");

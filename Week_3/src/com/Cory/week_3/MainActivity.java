@@ -129,36 +129,72 @@ public class MainActivity extends Activity {
     	String JSONString = m_file.readStringFile(this, fileName);
     	//Log.i("response", JSONString);
     	
-    	ArrayList<HashMap<String, String>>mylist = new ArrayList<HashMap<String,String>>();
+    	//ArrayList<HashMap<String, String>>mylist = new ArrayList<HashMap<String,String>>();
+    	
     	JSONObject job = null;
+    	JSONObject city = null;
     	JSONArray results = null;
+    	JSONArray weather = null;
     	
     		/* getting the array from the field "results" */
     		try {
+    			/* getting the file and converting it to a json object */
 				job = new JSONObject(JSONString);
-				results = job.getJSONArray("weather");
+				
+				/* getting the city object which will be drilled down to the "name" object */
+				city = job.getJSONObject("city");
+				
+				String cityName = city.getString("name");
+				
+				Log.i("city name", cityName);
+				
+				/* creating the results array  */
+				results = job.getJSONArray("list");
+				
+				for(int i = 0; i < results.length(); i++){
+					String dt = results.getJSONObject(i).getString("dt");
+					String pressure = results.getJSONObject(i).getString("pressure");
+					
+						Log.i("yes", dt + " " + pressure);
+						
+						
+					
+					
+					//Log.i("yes", dt + " " + pressure);
+				}
 				
 				/* setting up the different strings to look for in the json object */
+				/*
 				String weatherString = results.getJSONObject(0).getString("main");
 				
 				String nameString = job.getString("name");
 
 				String windSpeed = job.getJSONObject("wind").getString("speed");
+				*/
 				
-	    		HashMap<String, String> displayMap = new HashMap<String, String>();
+				
+				
+				
+				
+	    		//HashMap<String, String> displayMap = new HashMap<String, String>();
+	    		
+	    		
+	    		/*
 	    		displayMap.put("name", nameString);
 	    		displayMap.put("weather", weatherString);
 	    		displayMap.put("speed", windSpeed);
+	    		*/
 	    		
-	    		mylist.add(displayMap);
+	    		//mylist.add(displayMap);
 	    		
 	    		/* this is complicated but it basically assigns the rows for each element */
-	    		SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.list_row, 
-	    				new String[] {"name", "weather", "speed"}, 
-	    				new int[] {R.id.name, R.id.weather, R.id.speed});
+				
+	    		//SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.list_row, 
+	    			//	new String[] {"name", "weather", "speed"}, 
+	    			//	new int[] {R.id.name, R.id.weather, R.id.speed});
 	    		
 	    		
-	    		listView.setAdapter(adapter);
+	    		//listView.setAdapter(adapter);
 				
 			} catch (JSONException e) {
 				e.printStackTrace();
